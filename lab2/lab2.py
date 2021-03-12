@@ -25,22 +25,26 @@ def gcd():
         B_text.delete(0, END)
         return
 
-
-    x1, x2, y1, y2 = 1, 0, 0, 1
+    #начальные значения коэффициентов(0 и 1 шаги)
+    x0, x1, y0, y1 = 1, 0, 0, 1
+    #пока b не ноль
     while b:
-        x1, x2, y1, y2 = x2, x1 - x2 * (a // b), y2, y1 - y2 * (a // b)
+        #вычисление коэффициентов
+        #x_i = x_i-2 - q_i-1 * x_i-1
+        x0, x1, y0, y1 = x1, x0 - x1 * (a // b), y1, y0 - y1 * (a // b)
+        #обновляем значения: НОД(a, b)=НОД(b, a mod b)
         a, b = b, a % b
 
     #делаем entry активным, очищаем старое, записываем новое, отключаем entry
     X_text.config(state='normal')
     X_text.delete(0, END)
-    X_text.insert(0, x1)
+    X_text.insert(0, x0)
     X_text.config(state='disabled')
 
     #делаем entry активным, очищаем старое, записываем новое, отключаем entry
     Y_text.config(state='normal')
     Y_text.delete(0, END)
-    Y_text.insert(0, y1)
+    Y_text.insert(0, y0)
     Y_text.config(state='disabled')
 
     #делаем entry активным, очищаем старое, записываем новое, отключаем entry
