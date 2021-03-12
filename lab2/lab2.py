@@ -58,10 +58,13 @@ def gcd():
 
 
 def power():
+    #ловим не числа
     try:
+        #записываем числа
         a = int(a_text.get())
         b = int(b_text.get())
         n = int(n_text.get())
+        #проверяем, чтобы они были положительные
         if a <= 0 & b <= 0 & n <= 0:
             messagebox.showinfo("Ошибка", "Числа должны быть положительными")
             a_text.delete(0, END)
@@ -95,7 +98,6 @@ window = Tk()
 window.geometry('800x500')
 window.title("Лабораторная работа №2")
 window.resizable(0, 0)
-
 #--------------Интерфейс для алгоритма Евклида----------------------------------
 
 #Надпись "А"

@@ -124,12 +124,14 @@ def encrypt():
             word_result += chr(int(worddata[i], base=2) ^ int(keys_data[i], base=2))
 
     encrypt_text.config(state='normal')
+    encrypt_text.delete(0, END)
     encrypt_text.insert(0, word_result)
-    encrypt_text.config(state='disabled')
+    #encrypt_text.config(state='disabled')
 
     bin_encrypt_text.config(state='normal')
+    bin_encrypt_text.delete(0, END)
     bin_encrypt_text.insert(0, bin_result)
-    bin_encrypt_text.config(state='disabled')
+    #bin_encrypt_text.config(state='disabled')
 
     return 0
 
@@ -158,18 +160,20 @@ def decrypt():
             word_result += chr(int(encrypt_data[i], base=2) ^ int(keys_data[i], base=2))
 
     decrypt_text.config(state='normal')
+    decrypt_text.delete(0, END)
     decrypt_text.insert(0, word_result)
-    decrypt_text.config(state='disabled')
+    #decrypt_text.config(state='disabled')
 
     bin_decrypt_text.config(state='normal')
+    bin_decrypt_text.delete(0, END)
     bin_decrypt_text.insert(0, bin_result)
-    bin_decrypt_text.config(state='disabled')
+    #bin_decrypt_text.config(state='disabled')
 
     return 0
 
 window = Tk()
 window.geometry('800x700')
-window.title("XOR")
+window.title("Лабораторная работа №1")
 window.resizable(0, 0)
 
 entry_title = Label(text='Исходное слово', font=('ar_Aquaguy', 20))
