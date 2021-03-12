@@ -2,44 +2,56 @@ from tkinter import*
 from tkinter import messagebox
 
 
-def Euclid():
-    NOD_text.config(state='normal')
-    NOD_text.delete(0, END)
-    NOD_text.config(state='disabled')
+#функция нахождения НОД, с помощью расширенного алгоритма Евклида
+def gcd():
+    #проверяем, записывают ли числа
     try:
-        a = int(A_text.get())
-        b = int(B_text.get())
+        #на случай записи отрицательных чисел
         if a <= 0 & b <= 0:
+            #ловим ошибку, очищаем поля А и В, делаем return
             messagebox.showinfo("Ошибка", "Числа должны быть положительными")
             A_text.delete(0, END)
             B_text.delete(0, END)
             return
+        else:
+            #записываем числа
+            a = int(A_text.get())
+            b = int(B_text.get())
+    #записались не числа
     except Exception:
+        #ловим ошибку, очищаем поля А и В, делаем return
         messagebox.showinfo("Ошибка", "Неверный формат ввода")
         A_text.delete(0, END)
         B_text.delete(0, END)
         return
+
 
     x1, x2, y1, y2 = 1, 0, 0, 1
     while b:
         x1, x2, y1, y2 = x2, x1 - x2 * (a // b), y2, y1 - y2 * (a // b)
         a, b = b, a % b
 
+    #делаем entry активным, очищаем старое, записываем новое, отключаем entry
     X_text.config(state='normal')
+    X_text.delete(0, END)
     X_text.insert(0, x1)
     X_text.config(state='disabled')
 
+    #делаем entry активным, очищаем старое, записываем новое, отключаем entry
     Y_text.config(state='normal')
+    Y_text.delete(0, END)
     Y_text.insert(0, y1)
     Y_text.config(state='disabled')
 
+    #делаем entry активным, очищаем старое, записываем новое, отключаем entry
     NOD_text.config(state='normal')
+    NOD_text.delete(0, END)
     NOD_text.insert(0, a)
     NOD_text.config(state='disabled')
     return 0
 
 
-def Stepen():
+def power():
     try:
         a = int(a_text.get())
         b = int(b_text.get())
@@ -72,71 +84,98 @@ def Stepen():
     z_text.config(state='disabled')
     return 0
 
-
+#Инициализируем главную форму
 window = Tk()
 window.geometry('800x500')
-window.title("Расширенный алгоритм евклида и быстрое возведение в степень")
+window.title("Лабораторная работа №2")
 window.resizable(0, 0)
 
+#--------------Интерфейс для алгоритма Евклида----------------------------------
+
+#Надпись "А"
 A_title = Label(text='A', font=('ar_Aquaguy', 20))
 A_title.place(x=100, y=10)
 
+#Поле со значением А
 A_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER)
 A_text.place(x=70, y=50)
 A_text.focus()
 
+#Надпись "В"
 B_title = Label(text='B', font=('ar_Aquaguy', 20))
 B_title.place(x=280, y=10)
 
+#Поле со значением В
 B_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER)
 B_text.place(x=250, y=50)
 
+#Надпись "Х"
 X_title = Label(text='X', font=('ar_Aquaguy', 20))
 X_title.place(x=100, y=100)
 
+#Поле со значением х
 X_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER, state='disabled')
 X_text.place(x=70, y=150)
 
+#Надпись "Y"
 Y_title = Label(text='Y', font=('ar_Aquaguy', 20))
 Y_title.place(x=280, y=100)
 
+#Поле со значением у
 Y_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER, state='disabled')
 Y_text.place(x=250, y=150)
 
+#Надпись "НОД(А, В)"
 NOD_title = Label(text='НОД(A,B)', font=('ar_Aquaguy', 20))
 NOD_title.place(x=450, y=50)
 
+#Поле со значением НОД(А, В)
 NOD_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER, state='disabled')
 NOD_text.place(x=450, y=150)
 
-euclid = Button(text='Евклид', font=('ar_Aquaguy', 15), command=Euclid)
+#Кнопка запуска процесса нахождения НОД(А, В) расширенным алгоритмом Евклида
+euclid = Button(text='Евклид', font=('ar_Aquaguy', 15), command=gcd)
 euclid.place(x=630, y=100)
 
+
+
+#--------------Интерфес для алгоритма быстрого возведения в степень-------------
+
+#Надпись "А"
 a_title = Label(text='A', font=('ar_Aquaguy', 20))
 a_title.place(x=100, y=310)
 
+#Поле со значением А
 a_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER)
 a_text.place(x=70, y=350)
 
+#Надпись "В"
 b_title = Label(text='B', font=('ar_Aquaguy', 20))
 b_title.place(x=280, y=310)
 
+#Поле со значением В
 b_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER)
 b_text.place(x=250, y=350)
 
+#Надпись "N"
 n_title = Label(text='N', font=('ar_Aquaguy', 20))
 n_title.place(x=460, y=310)
 
+#Поле со значением N
 n_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER)
 n_text.place(x=430, y=350)
 
-stepen = Button(text='Степень', font=('ar_Aquaguy', 15), command=Stepen)
-stepen.place(x=630, y=300)
+#Кнопка запуска процесса быстрого возведения в степень
+power = Button(text='Степень', font=('ar_Aquaguy', 15), command=power)
+power.place(x=630, y=300)
 
+#Надпись "Z"
 z_title = Label(text='Z', font=('ar_Aquaguy', 20))
 z_title.place(x=630, y=370)
 
+#Поле со значеним z
 z_text = Entry(width=10, font=('ar_Aquaguy', 20), justify=CENTER, state='disabled')
 z_text.place(x=615, y=410)
 
+#запуск формы
 window.mainloop()
