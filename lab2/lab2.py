@@ -6,6 +6,9 @@ from tkinter import messagebox
 def gcd():
     #проверяем, записывают ли числа
     try:
+        #записываем числа
+        a = int(A_text.get())
+        b = int(B_text.get())
         #на случай записи отрицательных чисел
         if a <= 0 & b <= 0:
             #ловим ошибку, очищаем поля А и В, делаем return
@@ -13,10 +16,8 @@ def gcd():
             A_text.delete(0, END)
             B_text.delete(0, END)
             return
-        else:
-            #записываем числа
-            a = int(A_text.get())
-            b = int(B_text.get())
+
+
     #записались не числа
     except Exception:
         #ловим ошибку, очищаем поля А и В, делаем return
