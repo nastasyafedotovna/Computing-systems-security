@@ -35,16 +35,12 @@ def euclid(phi, e):
     return y1
 
 def decrypt(encrypt_data, d, n):
-    try:
-        decrypt_data = ''
-        for symbol in encrypt_data:
-            #print(symbol)
-            decrypt_data += str((chr(pow(int(symbol), d, n))))
-        return decrypt_data
-    except Exception:
-        messagebox.showinfo("Ошибка", "Криптограмма повреждена!")
-        enc_text.delete("1.0", END)
-        return
+    
+    decrypt_data = ''
+    for symbol in encrypt_data:
+        #print(symbol)
+        decrypt_data += str((chr(pow(int(symbol), d, n) % 1500)))
+    return decrypt_data
 
 
 
@@ -105,9 +101,6 @@ def TestMR(n):
 
 def enc_data():
     text = org_text.get("1.0", "end-1c")
-    if text == '':
-        messagebox.showinfo("Ошибка", "Введите текст")
-        return
     e = int(e_entry.get())
     n = int(n_entry.get())
     e_text = encrypt(text, e, n)
