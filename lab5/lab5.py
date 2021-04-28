@@ -4,6 +4,16 @@ import random
 import math
 import time
 
+
+alphabet = ['А','Б','В','Г','Д','Е','Ж','З','И',\
+    'Й','К','Л','М','Н','О','П','Р','С','Т','У','Ф','Х',\
+        'Ц','Ч','Ш','Щ','Ъ','Ы','Ь','Э','Ю','Я','а','б','в','г',\
+            'д','е','ж','з','и','й','к','л','м','н','о','п','р','с',\
+                'т','у','ф','х','ц','ч','ш','щ','ъ','ы','ь','ю','э','я']
+
+nums = [str(i) for i in range(16, 80)]                
+
+code_dict = dict(zip(nums, alphabet))
 def gcd(a, b):
     #пока b не ноль
     while b:
@@ -33,15 +43,24 @@ def pollard(n):
         x = f(x)
         y = f(f(y))
         iteration_count += 1
-        d = gcd(abs(x - y), n)
+        d = gcd(abs(y - x), n)
     if 1 < d < n:
         return d, iteration_count
 
+
 def decrypt(encrypt_data, d, n):
-    
+    encrypt_data = str(pow(int(encrypt_data), d, n))
+    temp = ''
+    for i in range(len(encrypt_data)):
+        temp += encrypt_data[i]
+        if i % 2 != 0:
+            temp += ' '
+    temp = temp.split(' ')
+    del temp[-1]
     decrypt_data = ''
-    for symbol in encrypt_data:
-        decrypt_data += str((chr(pow(int(symbol), d, n) % 1500)))
+    for symbol in temp:
+        decrypt_data += str(code_dict.get(str(symbol)))   
+        
     return decrypt_data
 
 
@@ -50,7 +69,7 @@ def dec():
     if etext=='':
         messagebox.showinfo("Ошибка", "Криптограмма отсутствует!")
         return
-    etext = etext.split(' ')
+    #etext = etext.split(' ')
     d = int(d_entry.get())
     n = int(n_entry.get())
     try:
@@ -121,7 +140,7 @@ window.resizable(0, 0)
 
 
 #Дешифрование
-lab_label = Label(text='Шифрование/Дешифрование:', font=('ar_Aquaguy', 15))
+lab_label = Label(text='Дешифрование:', font=('ar_Aquaguy', 15))
 lab_label.place(x=450, y=20)
 
 #text_label
