@@ -1,2 +1,2 @@
 # Computing-systems-security
-хехе нюзай бебру
+нюхай бебру
