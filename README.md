@@ -1,2 +1,2 @@
 # Computing-systems-security
-Лабки по БВС
+нюхай бебру
